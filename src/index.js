@@ -6,7 +6,8 @@ const Just = x => ({
     ap: y => y.map(x),
     chain: f => f(x),
     join: _ => x,
-    fork: (_, g) => g(x)
+    fork: (_, g) => g(x),
+    sequence: of => x.map(Maybe.of)
 });
 
 const Nothing = _ => ({
@@ -17,7 +18,8 @@ const Nothing = _ => ({
     ap: _ => Nothing(),
     chain: _ => Nothing(),
     join: _ => Nothing(),
-    fork: (f, _) => f()
+    fork: (f, _) => f(),
+    sequence: of => of(Nothing())
 });
 
 const Maybe = {
