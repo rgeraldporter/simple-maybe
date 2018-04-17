@@ -1,5 +1,5 @@
 # Maybe Monad
-### v0.1.0
+### v0.1.1
 [![Build Status](https://travis-ci.org/rgeraldporter/maybe-monad.svg?branch=master)](https://travis-ci.org/rgeraldporter/maybe-monad)
 
 `maybe-monad` is a simple, lightweight `Maybe` monad module.
