@@ -26,7 +26,7 @@ const result = Maybe.of(someFn())
                 .fork(err => handleAnError(err), value => doSomethingWithFinalResult(value));
 ```
 
-## Examples
+## Example
 
 Forthcoming!
 
