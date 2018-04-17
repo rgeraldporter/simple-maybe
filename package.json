@@ -1,0 +1,22 @@
+{
+  "name": "maybe-monad",
+  "version": "0.1.0",
+  "description": "The Maybe Monad",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "find ./src -name '*.spec.js' | NODE_ENV=test xargs node ./node_modules/jasmine/bin/jasmine.js"
+  },
+  "keywords": [
+    "maybe",
+    "monad",
+    "fantasy-land",
+    "functional"
+  ],
+  "author": "Robert Gerald Porter <rob@weeverapps.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "jasmine": "3.1.0",
+    "ramda": "0.25.0"
+  }
+}
