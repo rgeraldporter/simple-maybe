@@ -1,7 +1,7 @@
 {
-  "name": "maybe-monad",
-  "version": "0.1.1",
-  "description": "The Maybe Monad Module. A simple, lightweight Maybe. Plays nice with Ramda.",
+  "name": "simple-maybe",
+  "version": "0.1.2",
+  "description": "A Simple Maybe Monad Module. Plays nice with Ramda.",
   "main": "src/index.js",
   "scripts": {
     "test": "find ./src -name '*.spec.js' | NODE_ENV=test xargs node ./node_modules/jasmine/bin/jasmine.js"
@@ -18,7 +18,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rgeraldporter/maybe-monad.git"
+    "url": "https://github.com/rgeraldporter/simple-maybe.git"
   },
   "engines": {
     "node": ">=6.0.0"
