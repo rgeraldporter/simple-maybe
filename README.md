@@ -12,7 +12,7 @@ This library plays very well with Ramda.
 
 ## It's a what?
 
-Some backgroun in functional programming is helpful in understanding, but in short you would use this module when you are trying to take control of mutations, side-effects, and banish `null` issues from your code.
+Some background in functional programming is helpful in understanding, but in short you would use this module when you are trying to take control of mutations, side-effects, and banish `null` issues from your code.
 
 ## How to use
 
