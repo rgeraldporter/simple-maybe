@@ -3,6 +3,39 @@ const R = require('ramda');
 
 describe('The module', () => {
 
+    it("should satisfy the first monad law of left identity", () => {
+        const g = (n) => Maybe.of(n + 1);
+        const f = (n) => Maybe.of(n * 2);
+
+        // 1. unit(x).chain(f) ==== f(x)
+        const leftIdentity1 = Maybe.of(1).chain(f);
+        const leftIdentity2 = f(1);
+
+        expect(leftIdentity1.join()).toEqual(leftIdentity2.join());
+    });
+
+    it("should satisfy the second monad law of right identity", () => {
+        // 2. m.chain(unit) ==== m
+        const rightIdentity1 = Maybe.of(2).chain(Maybe.of);
+        const rightIdentity2 = Maybe.of(2);
+
+        expect(rightIdentity1.join()).toEqual(rightIdentity2.join());
+    });
+
+    it("should satisfy the third monad law of associativity", () => {
+        const g = n => Maybe.of(n + 1);
+        const f = n => Maybe.of(n * 2);
+
+        // 3. m.chain(f).chain(g) ==== m.chain(x => f(x).chain(g))
+        const associativity1 = Maybe.of(3)
+            .chain(g)
+            .chain(f);
+        const associativity2 = Maybe.of(3).chain(x => g(x).chain(f));
+
+        expect(associativity1.join()).toEqual(associativity2.join());
+    });
+
+
     it('should be return a Nothing if null or undefined is the value', () => {
         const notAThing = Maybe.of(null);
         expect(notAThing.inspect()).toBe('Nothing');
