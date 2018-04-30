@@ -1,5 +1,5 @@
 # Simple Maybe Monad
-### v0.1.3
+### v0.3.0
 [![Build Status](https://travis-ci.org/rgeraldporter/simple-maybe.svg?branch=master)](https://travis-ci.org/rgeraldporter/simple-maybe)
 
 `simple-maybe` is a simple, lightweight `Maybe` monad module.
@@ -19,7 +19,7 @@ Some background in functional programming is helpful in understanding, but in sh
 Only one thing is exposed by the module currently: `Maybe`.
 
 ```
-const {Maybe} = require('simple-maybe');
+const {Maybe, Just, Nothing} = require('simple-maybe');
 
 const result = Maybe.of(someFn())
                 .map(someOtherFn)

@@ -26,4 +26,4 @@ const Maybe = {
     of: x => x === null || x === undefined ? Nothing() : Just(x)
 };
 
-module.exports = {Maybe};
+module.exports = {Maybe, Nothing, Just};

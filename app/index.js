@@ -62,4 +62,4 @@ var Maybe = {
     }
 };
 
-module.exports = { Maybe: Maybe };
+module.exports = { Maybe: Maybe, Nothing: Nothing, Just: Just };
