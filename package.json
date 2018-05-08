@@ -1,11 +1,11 @@
 {
   "name": "simple-maybe",
-  "version": "0.3.1",
+  "version": "0.3.5",
   "description": "A Simple Maybe Monad Module. Plays nice with Ramda.",
   "main": "src/index.js",
   "scripts": {
     "test": "find ./src -name '*.spec.js' | NODE_ENV=test xargs node ./node_modules/jasmine/bin/jasmine.js",
-    "build": "./node_modules/browserify/bin/cmd.js ./src/index.js -o ./dist/simple-maybe.js -s Maybe --no-bundle-external -t [ babelify --presets [ es2015 react ] ] && babel --presets es2015 src -d app"
+    "build": "./node_modules/browserify/bin/cmd.js ./src/index.js -o ./dist/simple-maybe.js -s MaybeModule --no-bundle-external -t [ babelify --presets [ es2015 react ] ] && babel --presets es2015 src -d app"
   },
   "keywords": [
     "maybe",

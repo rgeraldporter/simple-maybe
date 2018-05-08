@@ -19,14 +19,19 @@ Some background in functional programming is helpful in understanding, but in sh
 Only one thing is exposed by the module currently: `Maybe`.
 
 ```
-const {Maybe, Just, Nothing} = require('simple-maybe');
+const {Maybe} = require('simple-maybe');
+
+const someFn = x => x + 1;
+const someOtherFn = x => x - 2;
+const someChainFn = x => Maybe.of(someFn(x))
 
 const result = Maybe.of(someFn())
                 .map(someOtherFn)
+                .chain(someChainFn)
                 .fork(err => handleAnError(err), value => doSomethingWithFinalResult(value));
 ```
 
-## Example
+## Better Example
 
 Forthcoming!
 
