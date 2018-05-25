@@ -1,5 +1,5 @@
 # Simple Maybe Monad
-### v0.3.0
+### v0.3.6
 [![Build Status](https://travis-ci.org/rgeraldporter/simple-maybe.svg?branch=master)](https://travis-ci.org/rgeraldporter/simple-maybe)
 
 `simple-maybe` is a simple, lightweight `Maybe` monad module.
