@@ -100,7 +100,7 @@ const result = Maybe.of(value)
 
 ## Roadmap
 
-No changes planned. Small functional programming libraries don't tend to change much.
+No changes planned, outside of documentation. Small functional programming libraries don't tend to change much. But they do tend to lack good, readable documentation.
 
 ## License
 
