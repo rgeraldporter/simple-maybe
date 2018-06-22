@@ -1,43 +1,106 @@
 # Simple Maybe Monad
-### v0.3.6
 [![Build Status](https://travis-ci.org/rgeraldporter/simple-maybe.svg?branch=master)](https://travis-ci.org/rgeraldporter/simple-maybe)
 
 `simple-maybe` is a simple, lightweight `Maybe` monad module.
 
 It is written in the `Either`-style pattern of a with `Just` and `Nothing` as the left/right identities.
 
-*Note*: this repo is quite new, and so long as I keep `0.x` as the version, it is still considered unstable. It won't be in `0.x` for long, though!
+This library plays very well with [Ramda](https://ramdajs.com/).
 
-This library plays very well with Ramda.
+## What is a "Maybe"?
 
-## It's a what?
+The term `Maybe` comes from functional programming. The concept is simple: _maybe_ there is a value, _maybe_ there is not. Using this concept helps handle problems that can arise from allowing a value in Javascript to become `null` or `undefined`.
 
-Some background in functional programming is helpful in understanding, but in short you would use this module when you are trying to take control of mutations, side-effects, and banish `null` issues from your code.
+`Maybe` puts a value into a safe container that isolates the value away from being able to cause side-effects.
 
-## How to use
+## API
 
-Only one thing is exposed by the module currently: `Maybe`.
+The API follows pattern that is common in functional Javascript programming:
 
 ```
-const {Maybe} = require('simple-maybe');
-
-const someFn = x => x + 1;
-const someOtherFn = x => x - 2;
-const someChainFn = x => Maybe.of(someFn(x))
-
-const result = Maybe.of(someFn())
-                .map(someOtherFn)
-                .chain(someChainFn)
-                .fork(err => handleAnError(err), value => doSomethingWithFinalResult(value));
+const container = Maybe.of(value);
 ```
 
-## Better Example
+Because `value` is a complete unknown, which may even be `undefined` even, we now interact with the value using its container.
 
-Forthcoming!
+## Taking a peek at a value
+
+At any time, you can emit a value though. Either through the console, or in the code itself:
+
+```
+>> container.inspect();
+
+"Just(1)"
+```
+
+This indicates the value is `1`. But what if it was `null`?
+
+```
+>> container.inspect();
+
+"Nothing"
+```
+
+In short, within the container, there is either a `Just` value, or `Nothing` value. Both can have all the same methods applies to them, the difference being that `Nothing` will always return `Nothing` and `Just` will execute as normal.
+
+## Mapping functions
+
+Running functions against the value is easy using `.map`.
+
+As an example, let's try to add `1` to the value:
+
+```
+const newContainer = container.map(value => value + 1);
+```
+
+This returns to you a new value. (Assuming you had a string or number here -- other types would crash, but fixing that requires a [type system](https://flow.org/en/)!)
+
+## Unwrapping a value
+
+In code, you can get the value through a `.join`:
+
+```js
+const container = Maybe.of(1);
+
+const value = container.join(); // value === 1
+```
+
+If you're looking to avoid ever assigning `null` or `undefined`, there are better ways to get your value out.
+
+Consider `.fork`:
+
+```js
+const result = container.fork(
+    x => {
+        // we got a Nothing, so lets handle our invalid case:
+        return "There was no value";
+    },
+    y => {
+        // we got Just(y), lets return the value
+        return "We got a value: " + y;
+    }
+);
+```
+
+In `.fork`, you pass in two functions: the first to handle the `Nothing` case, the other to handle the `Just` (actual value) case.
+
+## Bringing things together
+
+You may chain all these together, much like you may see in `Promise`s.
+
+```js
+const result = Maybe.of(value)
+    .map(val => val + 1)
+    .fork(x => "there was no value", y => `the value was: ${y}`);
+
+// if value = 1, result = "the value was: 2"
+// if value = null, result = "there was no value" (JS did not try to add null + 1)
+// if value = "string", result = "the value was: string1"
+```
 
 ## Roadmap
 
-Not sure yet. This may not need much updating as functional programming doesn't change much!
+No changes planned. Small functional programming libraries don't tend to change much.
 
 ## License
 
