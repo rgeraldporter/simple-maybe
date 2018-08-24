@@ -1,8 +1,15 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.MaybeModule = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var $$JustSymbol = Symbol();
+var $$NothingSymbol = Symbol();
+
 var Just = function Just(x) {
-    return {
+    var _ref;
+
+    return _ref = {
         isJust: true,
         isNothing: false,
         inspect: function inspect(_) {
@@ -26,13 +33,13 @@ var Just = function Just(x) {
         sequence: function sequence(of) {
             return x.map(Maybe.of);
         }
-    };
+    }, _defineProperty(_ref, $$JustSymbol, true), _defineProperty(_ref, $$NothingSymbol, false), _ref;
 };
 
 var Nothing = function Nothing(_) {
-    return {
-        isJust: false,
-        isNothing: true,
+    var _ref2;
+
+    return _ref2 = {
         inspect: function inspect(_) {
             return "Nothing";
         },
@@ -54,12 +61,12 @@ var Nothing = function Nothing(_) {
         sequence: function sequence(of) {
             return of(Nothing());
         }
-    };
+    }, _defineProperty(_ref2, $$JustSymbol, false), _defineProperty(_ref2, $$NothingSymbol, true), _ref2;
 };
 
 var Maybe = {
     of: function of(x) {
-        return x === null || x === undefined ? Nothing() : Just(x);
+        return x === null || x === undefined || x[$$NothingSymbol] ? Nothing() : Just(x);
     }
 };
 

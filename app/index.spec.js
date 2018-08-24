@@ -1,7 +1,8 @@
 'use strict';
 
 var _require = require('./index'),
-    Maybe = _require.Maybe;
+    Maybe = _require.Maybe,
+    Nothing = _require.Nothing;
 
 var R = require('ramda');
 
@@ -159,5 +160,11 @@ describe('The module', function () {
         expect(travTest.inspect()).toBe('Just(5,2.5,2)');
         var travTest2 = R.traverse(Maybe.of, safeDiv(10), [2, 0, 5]);
         expect(travTest2.inspect()).toBe('Nothing');
+    });
+
+    it('should be able to accept Nothing as a parameter and retain it as a Nothing and not a Just', function () {
+        var nada = Nothing();
+        var nadaMaybe = Maybe.of(nada);
+        expect(nadaMaybe.inspect()).toBe('Nothing');
     });
 });

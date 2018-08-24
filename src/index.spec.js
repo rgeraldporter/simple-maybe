@@ -1,4 +1,4 @@
-const {Maybe} = require('./index');
+const {Maybe, Nothing} = require('./index');
 const R = require('ramda');
 
 describe('The module', () => {
@@ -112,5 +112,11 @@ describe('The module', () => {
         expect(travTest.inspect()).toBe('Just(5,2.5,2)');
         const travTest2 = R.traverse(Maybe.of, safeDiv(10), [2, 0, 5]);
         expect(travTest2.inspect()).toBe('Nothing');
+    });
+
+    it('should be able to accept Nothing as a parameter and retain it as a Nothing and not a Just', () => {
+        const nada = Nothing();
+        const nadaMaybe = Maybe.of(nada);
+        expect(nadaMaybe.inspect()).toBe('Nothing');
     });
 });

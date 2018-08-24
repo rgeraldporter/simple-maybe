@@ -1,7 +1,14 @@
 "use strict";
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var $$JustSymbol = Symbol();
+var $$NothingSymbol = Symbol();
+
 var Just = function Just(x) {
-    return {
+    var _ref;
+
+    return _ref = {
         isJust: true,
         isNothing: false,
         inspect: function inspect(_) {
@@ -25,13 +32,13 @@ var Just = function Just(x) {
         sequence: function sequence(of) {
             return x.map(Maybe.of);
         }
-    };
+    }, _defineProperty(_ref, $$JustSymbol, true), _defineProperty(_ref, $$NothingSymbol, false), _ref;
 };
 
 var Nothing = function Nothing(_) {
-    return {
-        isJust: false,
-        isNothing: true,
+    var _ref2;
+
+    return _ref2 = {
         inspect: function inspect(_) {
             return "Nothing";
         },
@@ -53,12 +60,12 @@ var Nothing = function Nothing(_) {
         sequence: function sequence(of) {
             return of(Nothing());
         }
-    };
+    }, _defineProperty(_ref2, $$JustSymbol, false), _defineProperty(_ref2, $$NothingSymbol, true), _ref2;
 };
 
 var Maybe = {
     of: function of(x) {
-        return x === null || x === undefined ? Nothing() : Just(x);
+        return x === null || x === undefined || x[$$NothingSymbol] ? Nothing() : Just(x);
     }
 };
 
