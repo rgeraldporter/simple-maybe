@@ -1,4 +1,5 @@
 # Simple Maybe Monad
+
 [![Build Status](https://travis-ci.org/rgeraldporter/simple-maybe.svg?branch=master)](https://travis-ci.org/rgeraldporter/simple-maybe)
 
 `simple-maybe` is a simple, lightweight `Maybe` monad module.
@@ -73,16 +74,36 @@ Consider `.fork`:
 const result = container.fork(
     x => {
         // we got a Nothing, so lets handle our invalid case:
-        return "There was no value";
+        return 'There was no value';
     },
     y => {
         // we got Just(y), lets return the value
-        return "We got a value: " + y;
+        return 'We got a value: ' + y;
     }
 );
 ```
 
 In `.fork`, you pass in two functions: the first to handle the `Nothing` case, the other to handle the `Just` (actual value) case.
+
+### `forkL` and `forkR`
+
+For the sake of brevity, you may also use `forkL` (left) or `forkR` (right) to run a function against only one case. This is useful when you only want to handle one condition and do not need to do anything with the other.
+
+```js
+const result = container.forkL(
+    x => {
+        // we got a Nothing, so lets handle our invalid case:
+        return "There was no value";
+    });
+);
+
+const result2 = container.forkR(
+    y => {
+        // we got Just(y), lets return the value
+        return 'We got a value: ' + y;
+    });
+);
+```
 
 ## Bringing things together
 
@@ -91,7 +112,7 @@ You may chain all these together, much like you may see in `Promise`s.
 ```js
 const result = Maybe.of(value)
     .map(val => val + 1)
-    .fork(x => "there was no value", y => `the value was: ${y}`);
+    .fork(x => 'there was no value', y => `the value was: ${y}`);
 
 // if value = 1, result = "the value was: 2"
 // if value = null, result = "there was no value" (JS did not try to add null + 1)

@@ -10,8 +10,6 @@ var Just = function Just(x) {
     var _ref;
 
     return _ref = {
-        isJust: true,
-        isNothing: false,
         inspect: function inspect(_) {
             return "Just(" + x + ")";
         },
@@ -29,6 +27,12 @@ var Just = function Just(x) {
         },
         fork: function fork(_, g) {
             return g(x);
+        },
+        forkL: function forkL(_) {
+            return Nothing();
+        },
+        forkR: function forkR(f) {
+            return f(x);
         },
         sequence: function sequence(of) {
             return x.map(Maybe.of);
@@ -57,6 +61,12 @@ var Nothing = function Nothing(_) {
         },
         fork: function fork(f, _) {
             return f();
+        },
+        forkL: function forkL(f) {
+            return f();
+        },
+        forkR: function forkR() {
+            return Nothing();
         },
         sequence: function sequence(of) {
             return of(Nothing());

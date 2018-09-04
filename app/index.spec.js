@@ -140,6 +140,38 @@ describe('The module', function () {
         expect(forkRight).toBe('sporks for all!');
     });
 
+    it('should be able to forkR (right)', function () {
+        var forkOrSpoon = Maybe.of('spoon').forkR(function (x) {
+            return 'forked right!';
+        });
+        expect(forkOrSpoon).toBe('forked right!');
+    });
+
+    it('should be able to forkL (left)', function () {
+        var forkOrSpoon = Maybe.of('spoon').map(function (x) {
+            return null;
+        }).forkL(function (_) {
+            return 'forked!';
+        });
+        expect(forkOrSpoon).toBe('forked!');
+    });
+
+    it('should be able to forkL (left) and return nothing if it goes right', function () {
+        var forkOrSpoon = Maybe.of('spoon').forkL(function (x) {
+            return 'forked right!';
+        });
+        expect(forkOrSpoon).not.toBe('forked right!');
+    });
+
+    it('should be able to forkR (right) and return nothing if it goes left', function () {
+        var forkOrSpoon = Maybe.of('spoon').map(function (x) {
+            return null;
+        }).forkR(function (_) {
+            return 'forked!';
+        });
+        expect(forkOrSpoon).not.toBe('forked!');
+    });
+
     it('should be able to squence', function () {
         var seqTest = R.sequence(Maybe.of, Maybe.of(['stuffs', 'things']));
         expect(seqTest[0].inspect()).toBe('Just(stuffs)');
