@@ -9,7 +9,7 @@ var Just = function Just(x) {
     var _ref;
 
     return _ref = {
-        inspect: function inspect(_) {
+        inspect: function inspect() {
             return "Just(" + x + ")";
         },
         map: function map(f) {
@@ -21,7 +21,10 @@ var Just = function Just(x) {
         chain: function chain(f) {
             return f(x);
         },
-        join: function join(_) {
+        join: function join() {
+            return x;
+        },
+        emit: function emit() {
             return x;
         },
         fork: function fork(_, g) {
@@ -43,7 +46,7 @@ var Nothing = function Nothing(_) {
     var _ref2;
 
     return _ref2 = {
-        inspect: function inspect(_) {
+        inspect: function inspect() {
             return "Nothing";
         },
         map: function map(_) {
@@ -55,7 +58,10 @@ var Nothing = function Nothing(_) {
         chain: function chain(_) {
             return Nothing();
         },
-        join: function join(_) {
+        join: function join() {
+            return Nothing();
+        },
+        emit: function emit() {
             return Nothing();
         },
         fork: function fork(f, _) {
@@ -64,7 +70,7 @@ var Nothing = function Nothing(_) {
         forkL: function forkL(f) {
             return f();
         },
-        forkR: function forkR() {
+        forkR: function forkR(_) {
             return Nothing();
         },
         sequence: function sequence(of) {
