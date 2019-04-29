@@ -46,7 +46,7 @@ In short, within the container, there is either a `Just` value, or `Nothing` val
 
 ## Mapping functions
 
-Running functions against the value is easy using `.map`.
+Running functions against the value is easy using `.map(f)`.
 
 As an example, let's try to add `1` to the value:
 
@@ -58,17 +58,17 @@ This returns to you a new value. (Assuming you had a string or number here -- ot
 
 ## Unwrapping a value
 
-In code, you can get the value through a `.join`:
+In code, you can get the value through a `.emit()` (alias: `.join()`):
 
 ```js
 const container = Maybe.of(1);
 
-const value = container.join(); // value === 1
+const value = container.emit(); // value === 1
 ```
 
 If you're looking to avoid ever assigning `null` or `undefined`, there are better ways to get your value out.
 
-Consider `.fork`:
+Consider `.fork(f, g)`:
 
 ```js
 const result = container.fork(
@@ -83,11 +83,11 @@ const result = container.fork(
 );
 ```
 
-In `.fork`, you pass in two functions: the first to handle the `Nothing` case, the other to handle the `Just` (actual value) case.
+In `.fork(f, g)`, you pass in two functions: `f`, the first to handle the `Nothing` case; `g`, the other to handle the `Just` (actual value) case.
 
 ### `forkL` and `forkR`
 
-For the sake of brevity, you may also use `forkL` (left) or `forkR` (right) to run a function against only one case. This is useful when you only want to handle one condition and do not need to do anything with the other.
+For the sake of brevity, you may also use `.forkL(f)` (left) or `.forkR(f)` (right) to run a function `f` against only one case. This is useful when you only want to handle one condition and do not need to do anything with the other.
 
 ```js
 const result = container.forkL(
@@ -127,7 +127,7 @@ No changes planned, outside of documentation. Small functional programming libra
 
 The MIT License (MIT)
 
-Copyright (c) 2018 Robert Gerald Porter
+Copyright (c) 2018-2019 Robert Gerald Porter
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
