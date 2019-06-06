@@ -15,10 +15,19 @@ var Just = function Just(x) {
         map: function map(f) {
             return Maybe.of(f(x));
         },
+        fmap: function fmap(f) {
+            return Maybe.of(f(x));
+        },
         ap: function ap(y) {
             return y.map(x);
         },
         chain: function chain(f) {
+            return f(x);
+        },
+        bind: function bind(f) {
+            return f(x);
+        },
+        flatMap: function flatMap(f) {
             return f(x);
         },
         join: function join() {
@@ -52,10 +61,19 @@ var Nothing = function Nothing(_) {
         map: function map(_) {
             return Nothing();
         },
+        fmap: function fmap(_) {
+            return Nothing();
+        },
         ap: function ap(_) {
             return Nothing();
         },
         chain: function chain(_) {
+            return Nothing();
+        },
+        bind: function bind(_) {
+            return Nothing();
+        },
+        flatMap: function flatMap(_) {
             return Nothing();
         },
         join: function join() {

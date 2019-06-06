@@ -4,8 +4,11 @@ const $$NothingSymbol = Symbol();
 const Just = x => ({
     inspect: () => `Just(${x})`,
     map: f => Maybe.of(f(x)),
+    fmap: f => Maybe.of(f(x)),
     ap: y => y.map(x),
     chain: f => f(x),
+    bind: f => f(x),
+    flatMap: f => f(x),
     join: () => x,
     emit: () => x,
     fork: (_, g) => g(x),
@@ -19,8 +22,11 @@ const Just = x => ({
 const Nothing = _ => ({
     inspect: () => `Nothing`,
     map: _ => Nothing(),
+    fmap: _ => Nothing(),
     ap: _ => Nothing(),
     chain: _ => Nothing(),
+    bind: _ => Nothing(),
+    flatMap: _ => Nothing(),
     join: () => Nothing(),
     emit: () => Nothing(),
     fork: (f, _) => f(),

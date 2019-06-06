@@ -18,7 +18,7 @@ The term `Maybe` comes from functional programming. The concept is simple: _mayb
 
 The API follows pattern that is common in functional Javascript programming:
 
-```
+```js
 const container = Maybe.of(value);
 ```
 
@@ -28,7 +28,7 @@ Because `value` is a complete unknown, which may even be `undefined` even, we no
 
 At any time, you can emit a value though. Either through the console, or in the code itself:
 
-```
+```sh
 >> container.inspect();
 
 "Just(1)"
@@ -36,7 +36,7 @@ At any time, you can emit a value though. Either through the console, or in the 
 
 This indicates the value is `1`. But what if it was `null`?
 
-```
+```sh
 >> container.inspect();
 
 "Nothing"
@@ -46,15 +46,21 @@ In short, within the container, there is either a `Just` value, or `Nothing` val
 
 ## Mapping functions
 
-Running functions against the value is easy using `.map(f)`.
+Running functions against the value is easy using `.map(f)` (alias: `.fmap(f)`).
 
 As an example, let's try to add `1` to the value:
 
-```
+```js
 const newContainer = container.map(value => value + 1);
 ```
 
-This returns to you a new value. (Assuming you had a string or number here -- other types would crash, but fixing that requires a [type system](https://flow.org/en/)!)
+## Chaining functions
+
+Much like `map`, `chain` (aliases: `flatMap`, `bind`) can take a function and return the result -- though it will not be automatically rewrapped in a `Maybe`. This is useful if you plan within your function to return a `Maybe` or convert to another monad type.
+
+```js
+const newContainer = container.chain(value => Maybe.of(value + 1));
+```
 
 ## Unwrapping a value
 
